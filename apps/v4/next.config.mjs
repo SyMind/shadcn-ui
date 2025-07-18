@@ -1,4 +1,5 @@
 import { createMDX } from "fumadocs-mdx/next"
+import withRspack from "next-rspack"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -74,4 +75,4 @@ const nextConfig = {
 
 const withMDX = createMDX({})
 
-export default withMDX(nextConfig)
+export default process.env.NEXT_RSPACK ? withRspack(withMDX(nextConfig)) : withMDX(nextConfig)
