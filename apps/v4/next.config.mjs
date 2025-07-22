@@ -71,6 +71,13 @@ const nextConfig = {
       },
     ]
   },
+  webpack(config) {
+    config.cache = true;
+    config.experiments.cache = {
+      type: 'persistent',
+    };
+    return config;
+  }
 }
 
 const withMDX = createMDX({})

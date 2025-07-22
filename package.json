@@ -86,5 +86,10 @@
     "@types/react": "^18.2.65",
     "@types/react-dom": "^18.2.22",
     "typescript": "^5.5.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@rspack/core": "1.4.9"
+    }
   }
 }

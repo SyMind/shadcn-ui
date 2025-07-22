@@ -12,6 +12,6 @@ Test environment: Apple M1 Pro CPU
 
 | Bundler    | Build (No Cache)     | Build (Cache)     | Dev (No Cache)     | Dev (Cache)     |
 |------------|----------------------|-------------------|--------------------|-----------------|
-| Rspack     | 20.0s                | 8.0s              | 7.8s               | 0.432s          |
+| Rspack     | 17.0s                | 8.0s              | 6.8s               | 0.432s          |
 | Webpack    | 27.0s                | 13.0s             | 11s                | 9.6s            |
 | Turbopack  | 14.5s                | —                 | 5.4s               | —               |
