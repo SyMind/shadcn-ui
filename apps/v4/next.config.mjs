@@ -72,10 +72,10 @@ const nextConfig = {
     ]
   },
   webpack(config) {
-    config.cache = true;
-    config.experiments.cache = {
-      type: 'persistent',
-    };
+    config.cache = false;
+    // config.experiments.cache = {
+    //   type: 'persistent',
+    // };
     return config;
   }
 }
