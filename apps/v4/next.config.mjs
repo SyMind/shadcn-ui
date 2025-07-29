@@ -71,12 +71,53 @@ const nextConfig = {
       },
     ]
   },
-  webpack(config) {
-    config.cache = false;
+  webpack(webpackConfig, { webpack, config, dir }) {
+    if (process.env.RSPACK_TRACE) {
+      if (!globalThis.registerGlobalTrace) {
+        webpack.experiments.globalTrace.register(
+          "OVERVIEW",
+          "perfetto",
+          path.join(__dirname, "rspack.pftrace")
+        );
+        globalThis.registerGlobalTrace = true
+      }
+    }
+
+    if ("NextExternalsPlugin" in webpack) {
+      delete webpackConfig.externals
+
+      const compilerType = webpackConfig.name
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const builtinModules = require('module').builtinModules
+      webpackConfig.plugins.push(
+        new webpack.NextExternalsPlugin({
+          compilerType,
+          config,
+          builtinModules,
+          optOutBundlingPackageRegex,
+          finalTranspilePackages,
+          dir,
+          defaultOverrides
+        })
+      )
+    }
+
+    webpackConfig.plugins.push({
+      apply(compiler) {
+        compiler.hooks.compilation.tap("PLUGIN", () => {
+          console.time(compiler.name);
+        })
+        compiler.hooks.done.tap("PLUGIN", () => {
+          console.timeEnd(compiler.name);
+        })
+      }
+    })
+
+    webpackConfig.cache = false;
     // config.experiments.cache = {
     //   type: 'persistent',
     // };
-    return config;
+    return webpackConfig;
   }
 }
 
