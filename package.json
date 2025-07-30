@@ -89,7 +89,8 @@
   },
   "pnpm": {
     "overrides": {
-      "@rspack/core": "1.4.9"
+      "next-rspack>@rspack/core": "npm:@next-rspack/core@0.0.1-canary.2",
+      "@next-rspack/core>@rspack/core": "1.4.10"
     }
   }
 }
